@@ -17,10 +17,8 @@ class MastersController extends Controller
      */
     public function index()
     {
-        $masters = DB::table('masters')
-        ->join('users','users.nama_cabang','=','masters.nama_cabang')
-        ->get();
-        return view('masters.index', compact('masters'));
+        $data['masters'] = DB::table('masters')->get();
+        return view('masters.index', $data);
     }
 
     /**
@@ -51,7 +49,7 @@ class MastersController extends Controller
             'nama_cabang' => 'required',   
         ],$messages);
         Master::create([
-            'kode_cabang' => Master::getId($request),
+            'id' => Master::getId($request),
             // 'kode_cabang' => $request->kode_cabang,
             'nama_cabang' => $request->nama_cabang,
         ]);
@@ -101,6 +99,7 @@ class MastersController extends Controller
      */
     public function destroy(Master $master)
     {
+        // $master = DB::table('masters')->get();
         Master::destroy($master->id);
 
         return redirect('/masters')->with('status', 'Data Berhasil Dihapus!!');

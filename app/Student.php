@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Student;
 use App\Payment;
 use App\Master;
 
@@ -10,13 +11,17 @@ class Student extends Model
 {
     public function Master()
     {
-        return $this->hasMany(Master::class);
+        return $this->belongsTo(Master::class,'id');
+    }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
     }
     public function payment()
     {
         return $this->hasMany(Payment::class);
     }
-    protected $fillable = ['nama', 'email', 'nis', 'kode_cabang', 'kelas', 'jenjang', 'alamat', 'biaya', 'biaya_daftar' ];
+    protected $fillable = ['user_id', 'nama', 'email', 'nis', 'master_id', 'kelas', 'jenjang', 'alamat', 'biaya', 'biaya_daftar' ];
     public static function getId($request){  
         $jenjang = $request->jenjang; //nilai jenjang didapat dari parameter
         $digit = 4; //banyaknya digit angka setelah kode yang diinginkan

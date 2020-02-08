@@ -60,6 +60,7 @@
                           <table id="" class="table table-bordered table-striped table-hover table-condensed tfix">
                               <thead class="thead bg-dark text-light"align="center" >
                                 <tr>
+                                    <td>#</td>
                                     <td>NIS</td>
                                     <td>Nama</td>
                                     <td>Email</td>
@@ -73,9 +74,12 @@
                                     <td>MENU</td>
                                 </tr>
                             </thead>
+                            <?php $no= 0;?>
                             @foreach($payments as $payment)
+                            <?php $no++ ;?>
                             <tbody>
                                 <tr>
+                                    <td>{{ $no }}</td>
                                     <td>{{ $payment->nis }}</td>
                                     <td>{{ $payment->nama }}</td>
                                     <td>{{ $payment->email }}</td>

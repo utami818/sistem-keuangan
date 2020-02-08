@@ -45,21 +45,23 @@
                                     <th>#</th>
                                     <th>Kode Cabang</th>
                                     <th>Nama Cabang</th>
-                                    <th>email Cabang</th>
+                                    <!-- <th>email Cabang</th> -->
                                     <th>Tanggal</th>
                                     <th>MENU</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $no= 0;?>
                                 @foreach($masters as $data)
+                                <?php $no++ ;?>
                                 <tr>
-                                    <td></td>
-                                    <td>{{ $data->kode_cabang }}</td>
+                                    <td>{{ $no }}</td>
+                                    <td>{{ $data->id }}</td>
                                     <td>{{ $data->nama_cabang }}</td>
-                                    <td>{{ $data->email }}</td>
+                                    <!-- <td></td> -->
                                     <td>{{ $data->created_at }}</td>
                                     <td> 
-                                    <form action="masters/{{ $data->id }}" method="post">
+                                    <form action="masters/{{ $data->no_urut }}" method="post">
                                       @method('delete')
                                       @csrf
                                       <button type="submit" class="badge badge-danger badge-info">Hapus</button>

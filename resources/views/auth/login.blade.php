@@ -11,7 +11,7 @@
             <div class="col-lg-5 col-md-6">
               <h1 class="text-white">Welcome!</h1>
               <img width="150px" height="100px" src="{{ asset('argon/assets/img/theme/airlangga.png') }}">
-              <p class="text-lead text-light">Use these awesome forms to login or create new account in your database.</p>
+              <p class="text-lead text-light"></p>
             </div>
           </div>
         </div>
@@ -81,9 +81,9 @@
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary my-4">{{ __('Login') }}</button>
                     @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                        <!-- <a class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
-                        </a>
+                        </a> -->
                     @endif
                 </div>
               </form>

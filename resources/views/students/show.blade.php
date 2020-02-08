@@ -3,6 +3,7 @@
 
 <head>
 @include('layouts.css')
+<title>Detail Siswa {{ $student->nama }}</title>
 </head>
 
 <body>
@@ -57,7 +58,7 @@
                 <tr>
                   <td>4. Cabang</td>
                   <td>:</td>
-                  <td>{{ $student->kode_cabang }}</td>
+                  <td>{{ $student->master_id }}</td>
                 </tr>
                 <tr>
                   <td>5. Alamat</td>

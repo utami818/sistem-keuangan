@@ -35,7 +35,7 @@
     .text{
       text-align: center;
       position: absolute;
-      top: 60%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
@@ -47,7 +47,7 @@
     <nav class="navbar fixed-top navbar-expand-md navbar-dark" id="sidenav-main" style="background-color:rgba(259,258,255,0.2)">
       <div class="container">
           <a class="navbar-brand" href="{{ url('/') }}">
-          <img width="150px" height="40px" src="{{ asset('argon/assets/img/theme/mbi_logo.png') }}">
+          <img width="40px" height="40px" src="{{ asset('argon/assets/img/theme/logo.png') }}">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
               <span class="navbar-toggler-icon"></span>
@@ -55,7 +55,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <!-- Left Side Of Navbar -->
               <ul class="navbar-nav mr-auto">
-
               </ul>
 
               <!-- Right Side Of Navbar -->
@@ -99,7 +98,7 @@
           @yield('content')
       </main>
   </div>
-  <div class="jumbotron jumbotron-fluid mt-3 mb-3" style="background-color:rgba(259,258,255,0.1);">
+  <!-- <div class="jumbotron jumbotron-fluid mt-3 mb-3" style="background-color:rgba(259,258,255,0.1);">
     <div class="container">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -130,50 +129,55 @@
           </a>
       </div>
     </div> 
-  </div>
+  </div> -->
   <div class="text">
-    <h1 style="font-size:50px; text-shadow: 2px 2px grey;">Admin</h1>
-    <h5>untuk keamanan data masuk dengan login!</h5><br>
-      <ul class="navbar-nav ml-auto">
-        @guest
-        <li class="nav-item">
-        <i class="ni ni-key-25"></i>
-            <a class="btn btn-outline-primary" style="box-shadow: 2px 2px grey;" href="{{ route('login') }}">{{ __('Login') }}</a>
-        </li>
+    <div class="card" style="width: 18rem; background-color:rgba(259,258,255,0.1); color: white;">
+    <img src="{{ asset('argon/assets/img/theme/airlangga.png') }}" class="card-img-top" alt="...">  
+      <div class="card-body" style="background-color:rgba(259,258,255,0.2)">
+        <h5 class="card-title" style="font-size:30px; text-shadow: 2px 2px black;">Admin</h5>
         <br>
-          @if (Route::has('register'))
-            <!-- <li class="nav-item">
-            <i class="ni ni-circle-08"></i>
-                <a class="btn btn-outline-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
-            </li> -->
-          @endif
-    
-          @else
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>hallo!  
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
-    
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+        <ul class="navbar-nav ml-auto">
+            @guest
+            <li class="nav-item">
+            <i class="ni ni-key-25"></i>
+                <a class="btn btn-outline-light" style="box-shadow: 2px 2px black;" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
-        @endguest
-      </ul>
+            <br>
+              @if (Route::has('register'))
+                <!-- <li class="nav-item">
+                <i class="ni ni-circle-08"></i>
+                    <a class="btn btn-outline-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li> -->
+              @endif
+        
+              @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>hallo!  
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+        
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+          </ul>
+      </div>
+    </div>    
   </div>
   <footer class="footer fixed-bottom pt-3 pb-3" style="background-color:rgba(259,258,255,0.1)">
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2018 <a href="#" class="font-weight-bold ml-1 text-light" target="_blank">TeamQdev </a>
+              &copy; 2018 <img width="40px" height="40px" src="{{ asset('argon/assets/img/theme/logo.png') }}"><a href="#" class="font-weight-bold ml-1 text-light" target="_blank">Qdev Team </a>
             </div>
           </div>
           <div class="col-xl-6">
@@ -186,9 +190,6 @@
               </li>
               <li class="nav-item">
                 <a href="http://blog.creative-tim.com" class="nav-link text-light" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link text-light" target="_blank">MIT License</a>
               </li>
             </ul>
           </div>

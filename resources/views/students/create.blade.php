@@ -41,11 +41,20 @@
                             @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                           </div>
                         <div class="form-group">
-                            <label for="kode_cabang">Cabang</label>
-                            <select class="form-control" name="kode_cabang">
+                            <label for="master_id">Cabang</label>
+                            <select class="form-control" name="master_id">
                               <option selected="" disabled="">Pilih Cabang</option>
                               @foreach($masters as $m)
-                              <option>{{ $m->kode_cabang }}</option>
+                              <option>{{ $m->id }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                        <div class="form-group">
+                            <label for="user_id">Cabang</label>
+                            <select class="form-control" name="user_id">
+                              <option selected="" disabled="">Admin</option>
+                              @foreach($user as $u)
+                              <option>{{ $u->id }}</option>
                               @endforeach
                             </select>
                           </div>

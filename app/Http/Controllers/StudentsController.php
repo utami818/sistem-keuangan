@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Master;
+use App\User;
 use App\Student;
 use App\payment;
 use DB;
@@ -19,18 +20,19 @@ class StudentsController extends Controller
      */
     public function index()
     {   
-        $data = DB::table('students');
-        $id = $data->get('id');          
-        $students = DB::table('students')
-        ->join('masters','masters.kode_cabang','=','students.kode_cabang')
-        // ->select('masters.*', 'students.nis', 'students.nama','students.email', 'students.alamat', 'students.kelas', 'students.jenjang', 'students.biaya', 'students.biaya_daftar')
+        $data['students'] = Student::with('master')
+        ->with('user')
         ->get();
-        $student = $students->where('students.id', $id)->first();
-        // $detail = Student::where('nis', $student->nis)->get();
-        $total = Student::max('id');
-        $totals = Student::sum('biaya_daftar');
+        // $data['id'] = $data['user']->student()->master();
+        // $data['users'] = User::with('student')
+        // // ->where('id', $id)
+        // ->get();
+        $data['student'] = Student::all();
+        $data['total'] = Student::max('id');
+        $data['totals'] = Student::sum('biaya_daftar');
         // $students = Student::with(['payments', 'payments.angsuran'])->orderBy('created_at', 'DESC')->get();
-        return view('students.index', compact('students', 'total', 'totals', 'student'));
+        // dd($data);
+        return view('students.index', $data);
     }
 
     /**
@@ -41,7 +43,8 @@ class StudentsController extends Controller
     public function create()
     {
         $masters = DB::table('masters')->get();
-        return view('students.create', compact('masters'));
+        $user = DB::table('users')->get();
+        return view('students.create', compact('masters', 'user'));
     }
     /**
      * Store a newly created resource in storage.
@@ -53,7 +56,8 @@ class StudentsController extends Controller
     {
         $messages = [
             'nis.required' => ':attribute jangan diubah!!',
-            'kode_cabang.required' => ':attribute jangan diubah!!',
+            'master_id.required' => ':attribute jangan diubah!!',
+            'user_id.required' => ':attribute jangan diubah!!',
             'nama.required' => ':attribute harus diisi!!',
             'email.required' => ':attribute harus diisi!!',
             'email.unique' => ':attribute sudah terdaftar, :attribute tidak boleh sama!!',
@@ -62,7 +66,8 @@ class StudentsController extends Controller
             'biaya.required' => ':attribute harus diisi!!',
         ];
         $request->validate([
-            'kode_cabang' => 'required',
+            'master_id' => 'required',
+            // 'user_id' => 'required',
             'nama' => 'required',
             'email' => 'required|unique:students',
             'kelas' => 'required',
@@ -74,7 +79,8 @@ class StudentsController extends Controller
         ],$messages);
         Student::create([
             'nis' => Student::getId($request),
-            'kode_cabang' => $request->kode_cabang,
+            'master_id' => $request->master_id,
+            'user_id' => $request->user_id,
             'nama' => $request->nama,
             'email' => $request->email,
             // 'nis' => $request->nis,
@@ -96,14 +102,15 @@ class StudentsController extends Controller
      */
     public function show(Student $student)
     {
-        // $students = DB::table('students')
+        // $students = DB::table('students');
         // ->join('payments','payments.nis','=','students.nis')
         // ->get();
-        // $data['student'] = $students->where('id', $id)->first();
-        // $data['detail'] = payment::where('nis', $data['student']->nis)->get();
-        // $data['total'] = payment::where('nis', $data['student']->nis)->sum('angsuran');
+        // $data['student'] = $students->where('students.id', $id)->first();
+        // $data['detail'] = student::where('students.nis', $data['student']->nis)->get();
+        // $data['total'] = student::where('nis', $data['student']->nis)->sum('angsuran');
 
         return view('students.show', compact('student'));
+        // return $student;
     }
 
     /**

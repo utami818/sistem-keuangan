@@ -61,19 +61,23 @@
                                     <th>#</th>
                                     <th>NIS</th>
                                     <th>Nama</th>
-                                    <th>Nama Cabang</th>
+                                    <th>Cabang</th>
+                                    <th>Admin</th>
                                     <th>Biaya Penhaftaran</th>
                                     <th>Tanggal</th>
                                     <th>MENU</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($students as $data)
+                                <?php $no= 0;?>
+                                @foreach($student as $data)
+                                <?php $no++;?>
                                 <tr>
-                                    <td></td>
+                                    <td>{{ $no }}</td>
                                     <td>{{ $data->nis }}</td>
                                     <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->nama_cabang }}</td>
+                                    <td>{{ $data->master_id }}</td>
+                                    <td>{{ $data->user_id }}</td>
                                     <td>Rp {{ number_format($data->biaya_daftar,0) }}</td>
                                     <td>{{ $data->created_at }}</td>
                                     <td> 
